@@ -24,7 +24,7 @@ public class Profile {
     private Boolean isActif;
 
     @OneToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false, unique = true)
+    @JoinColumn(name = "utilisateur_Id", nullable = false, unique = true)
     private Utilisateur utilisateur;
 
 }
