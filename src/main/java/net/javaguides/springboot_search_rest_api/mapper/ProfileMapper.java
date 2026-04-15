@@ -4,6 +4,8 @@ package net.javaguides.springboot_search_rest_api.mapper;
 import net.javaguides.springboot_search_rest_api.dto.ProfileDto;
 import net.javaguides.springboot_search_rest_api.entity.Profile;
 import net.javaguides.springboot_search_rest_api.entity.Utilisateur;
+import net.javaguides.springboot_search_rest_api.repository.ProfileRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ProfileMapper {
 

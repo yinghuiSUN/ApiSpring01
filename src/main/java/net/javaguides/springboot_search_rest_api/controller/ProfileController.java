@@ -2,7 +2,7 @@ package net.javaguides.springboot_search_rest_api.controller;
 
 import net.javaguides.springboot_search_rest_api.dto.ProfileDto;
 import net.javaguides.springboot_search_rest_api.service.ProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.javaguides.springboot_search_rest_api.utils.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = Util.URL_BASE)
 @RequestMapping("/api/profiles")
 public class ProfileController {
 
-    @Autowired
-    private ProfileService profileService;
+    private final ProfileService profileService;
+
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     @PostMapping("/createProfile")
     ResponseEntity<ProfileDto> createProfile(@RequestBody ProfileDto dto){

@@ -1,11 +1,12 @@
-package net.javaguides.springboot_search_rest_api.service;
+package net.javaguides.springboot_search_rest_api.service.impl;
 
 import net.javaguides.springboot_search_rest_api.dto.UtilisateurDto;
 import net.javaguides.springboot_search_rest_api.entity.Profile;
 import net.javaguides.springboot_search_rest_api.entity.Utilisateur;
 import net.javaguides.springboot_search_rest_api.mapper.UtilisateurMapper;
 import net.javaguides.springboot_search_rest_api.repository.UtilisateurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.javaguides.springboot_search_rest_api.service.UtilisateurService;
+import net.javaguides.springboot_search_rest_api.utils.Util;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,16 @@ import java.util.stream.Collectors;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-    @Autowired
-    UtilisateurRepository utilisateurRepository;
+    private final UtilisateurRepository utilisateurRepository;
+
+    // 在 Spring Framework 里，如果你用 @Autowired 做字段注入（field injection），你的类就必须依赖 Spring
+    // 才能正常工作（自己 new 会得到 null），而且在做单元测试时也很难替换成 mock 对象；但如果用构造函数注入
+    // （constructor injection），你可以在创建对象时手动传入依赖，这样代码既更清晰
+
+    //TODO injection difference a voir
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
 
     @Override
     public List<UtilisateurDto> getAllUtilisateur() {
@@ -26,7 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UtilisateurDto getUtilisateurByName(final String name) {
         Utilisateur retour = utilisateurRepository.findByName(name).orElseThrow(
-                 ()-> new RuntimeException("Utilisateur does not exist")
+                 ()-> new RuntimeException(Util.ERROR_001)
         );
         return UtilisateurMapper.mapToUtilisateur(retour);
 
@@ -57,11 +66,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         String retour = "";
         Optional<Utilisateur > user = utilisateurRepository.findByName(dto.getName());
         if(user.isEmpty()) {
-            retour = "Utilisateur does not exist";
+            retour = Util.ERROR_001;
         } else if (!user.get().getPassword().equals(dto.getPassword())) {
-            retour = "Password is incorrect";
+            retour = Util.ERROR_002;
         } else {
-            retour = "Connexion is OK";
+            retour = Util.ERROR_003;
         }
         return retour;
     }
