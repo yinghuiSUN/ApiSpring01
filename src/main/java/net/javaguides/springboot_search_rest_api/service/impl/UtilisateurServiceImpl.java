@@ -74,4 +74,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
         return retour;
     }
+
+    @Override
+    public String findUserById(Long idUser) {
+        Utilisateur utilisateur = utilisateurRepository.findById(idUser).orElseThrow(
+                () -> new RuntimeException(Util.ERROR_001)
+        );
+        return  utilisateur.getName();
+    }
+
+    @Override
+    public UtilisateurDto findUserByName(String name) {
+        Utilisateur result = utilisateurRepository.findByName(name).orElseThrow(
+                () -> new RuntimeException(Util.ERROR_001)
+        );
+        return UtilisateurMapper.mapToUtilisateur(result);
+    }
 }

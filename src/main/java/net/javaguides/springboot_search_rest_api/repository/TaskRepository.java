@@ -11,4 +11,5 @@ public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificat
     List<Task> findByUtilisateur_IdAndId (Long utilisateurId, Long id);
     List<Task> findByUtilisateur_Id (Long utilisateurId);
 
+
 }

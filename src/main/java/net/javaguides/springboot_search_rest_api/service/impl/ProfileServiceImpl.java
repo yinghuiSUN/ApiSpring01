@@ -7,8 +7,9 @@ import net.javaguides.springboot_search_rest_api.entity.Utilisateur;
 import net.javaguides.springboot_search_rest_api.mapper.ProfileMapper;
 import net.javaguides.springboot_search_rest_api.repository.ProfileRepository;
 import net.javaguides.springboot_search_rest_api.service.ProfileService;
+import net.javaguides.springboot_search_rest_api.specification.ProfileSpecification;
 import net.javaguides.springboot_search_rest_api.utils.Util;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +27,6 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileDto createProfile(ProfileDto dto) {
         Profile p = ProfileMapper.mapToProfile(dto);
-        Utilisateur user = new Utilisateur();
-        user.setName(dto.getName());
-        p.setUtilisateur(user);
         final Profile profileNew = profileRepository.save(p);
 
         return ProfileMapper.mapToProfile(profileNew);
@@ -58,6 +56,16 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileDto> getAllProfiles() {
         return profileRepository.findAll().stream().map(
                         ProfileMapper::mapToProfile).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProfileDto getProfileByIdUser(final Long idUser) {
+        Specification<Profile> spec = Specification.where(ProfileSpecification.hasUserId(idUser));
+        List<Profile> retour = profileRepository.findAll(spec);
+        if(!retour.isEmpty()) {
+            return ProfileMapper.mapToProfile(retour.get(0));
+        }
+        return null;
     }
 
 }
