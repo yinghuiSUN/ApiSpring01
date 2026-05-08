@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,6 +27,9 @@ public class Utilisateur {
 
     @OneToOne(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private Profile profile;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private List<Task> listTask;
 
 
 }

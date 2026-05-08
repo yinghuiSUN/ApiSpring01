@@ -15,5 +15,7 @@ public interface UtilisateurService {
 
     String checkConnexion(final UtilisateurDto dto);
 
+    String findUserById(final Long idUser);
 
+    UtilisateurDto findUserByName(String name);
 }

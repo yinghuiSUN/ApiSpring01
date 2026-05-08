@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UtilisateurDto {
-    private Long id;
+@Getter
+@Setter
+public class ConnexionDto {
     @NotNull
     private String name;
     @NotNull

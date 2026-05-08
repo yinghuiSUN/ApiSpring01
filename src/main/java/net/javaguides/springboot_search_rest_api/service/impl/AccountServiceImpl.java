@@ -1,9 +1,10 @@
-package net.javaguides.springboot_search_rest_api.service;
+package net.javaguides.springboot_search_rest_api.service.impl;
 
 import net.javaguides.springboot_search_rest_api.dto.AccountDto;
 import net.javaguides.springboot_search_rest_api.entity.Account;
 import net.javaguides.springboot_search_rest_api.mapper.AccountMapper;
 import net.javaguides.springboot_search_rest_api.repository.AccountRepository;
+import net.javaguides.springboot_search_rest_api.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

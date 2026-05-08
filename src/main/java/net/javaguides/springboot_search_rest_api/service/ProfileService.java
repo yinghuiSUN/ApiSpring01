@@ -13,4 +13,6 @@ public interface ProfileService {
 
     List<ProfileDto> getAllProfiles();
 
+    ProfileDto getProfileByIdUser(final Long idUser);
+
 }
