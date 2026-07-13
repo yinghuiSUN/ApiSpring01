@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.javaguides.springboot_search_rest_api.enums.Role;
 
 import java.util.List;
 
@@ -30,6 +31,18 @@ public class Utilisateur {
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Task> listTask;
+
+    // 所属部门
+    private Long deptId;
+
+    // 一个用户属于一个角色
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // 一个用户有一个直属上司
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Utilisateur manager;
 
 
 }
