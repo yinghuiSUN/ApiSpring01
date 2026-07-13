@@ -76,7 +76,10 @@ public class ExportTaskServiceImpl implements ExportTaskService {
     private void createEnteteExcel(Long idUser, Sheet sheet) {
         Row row0 = sheet.createRow(0);
         row0.createCell(2).setCellValue("Name");
-        row0.createCell(3).setCellValue(utilisateurService.findUserById(idUser));
+        if (utilisateurService.findUserById(idUser)!= null) {
+            row0.createCell(3).setCellValue(utilisateurService.findUserById(idUser).getName());
+        }
+
     }
 
     private static void createHeaderBordure(CellStyle headerStyle) {
