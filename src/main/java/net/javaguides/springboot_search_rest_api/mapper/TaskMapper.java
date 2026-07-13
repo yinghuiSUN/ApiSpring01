@@ -2,7 +2,8 @@ package net.javaguides.springboot_search_rest_api.mapper;
 
 import net.javaguides.springboot_search_rest_api.dto.TaskDto;
 import net.javaguides.springboot_search_rest_api.entity.Task;
-import net.javaguides.springboot_search_rest_api.entity.Utilisateur;
+import net.javaguides.springboot_search_rest_api.enums.Priority;
+import net.javaguides.springboot_search_rest_api.enums.TaskStatus;
 
 public class TaskMapper {
 
@@ -14,8 +15,8 @@ public class TaskMapper {
         result.setTitle(dto.getTitle());
         result.setDescription(dto.getDescription());
         result.setDueDate(dto.getDueDate());
-        result.setStatus(dto.getStatus());
-        result.setPriority(dto.getPriority());
+        result.setStatus(TaskStatus.valueOf(dto.getStatus()));
+        result.setPriority(Priority.valueOf(dto.getPriority()));
 
         return result;
     }
@@ -28,8 +29,8 @@ public class TaskMapper {
         result.setTitle(task.getTitle());
         result.setDescription(task.getDescription());
         result.setDueDate(task.getDueDate());
-        result.setStatus(task.getStatus());
-        result.setPriority(task.getPriority());
+        result.setStatus(task.getStatus().name());
+        result.setPriority(task.getPriority().name());
         result.setUserId(task.getUtilisateur().getId());
 
         return result;

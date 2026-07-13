@@ -7,6 +7,7 @@ import net.javaguides.springboot_search_rest_api.service.UtilisateurService;
 import net.javaguides.springboot_search_rest_api.utils.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,16 +49,26 @@ public class UtilisateurController {
     }
     @GetMapping("/checkName")
     ResponseEntity<ApiResponse<Boolean>> isNameExiste(@RequestParam(name ="name") String name) {
-        UtilisateurDto userFind = utilisateurService.getUtilisateurByName(name);
-        Boolean result = userFind == null? Boolean.FALSE: Boolean.TRUE;
+        UtilisateurDto userFound = utilisateurService.findUserByName(name);
+        Boolean result = userFound == null? Boolean.FALSE: Boolean.TRUE;
         return ResponseEntity.ok(new ApiResponse<>(Util.USER_MSG_002, result, HttpStatus.OK.value()));
     }
-    @GetMapping("/researchName/{name}")
+    @GetMapping("/findUserById/{idUser}")
+    ResponseEntity<ApiResponse<UtilisateurDto>>findUserById(@PathVariable (name = "idUser") Long idUser) {
+        UtilisateurDto retour = utilisateurService.findUserById(idUser);
+        return ResponseEntity.ok(new ApiResponse<>(Util.USER_MSG_003, retour, HttpStatus.OK.value()));
+    }
+    @GetMapping("/findUserByName/{name}")
     ResponseEntity<ApiResponse<UtilisateurDto>>findUserByName(@PathVariable (name = "name") String name) {
         UtilisateurDto retour = utilisateurService.findUserByName(name);
-
-        return ResponseEntity.ok(new ApiResponse<>(Util.USER_MSG_001, retour, HttpStatus.OK.value()));
+        return ResponseEntity.ok(new ApiResponse<>(Util.USER_MSG_003, retour, HttpStatus.OK.value()));
     }
 
+    @GetMapping("/findUsers/{idUser}")
+    ResponseEntity<ApiResponse<List<UtilisateurDto>>>findUsersByDatascope( @PathVariable(name = "idUser") Long idUser) {
+        UtilisateurDto currentUser = utilisateurService.findUserById(idUser);
+        List<UtilisateurDto> retour = utilisateurService.findUserByDatascope(currentUser);
+        return ResponseEntity.ok(new ApiResponse<>(Util.USER_MSG_001, retour, HttpStatus.OK.value()));
+    }
 
 }

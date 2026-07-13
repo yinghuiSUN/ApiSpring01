@@ -76,7 +76,10 @@ public class ExportTaskServiceImpl implements ExportTaskService {
     private void createEnteteExcel(Long idUser, Sheet sheet) {
         Row row0 = sheet.createRow(0);
         row0.createCell(2).setCellValue("Name");
-        row0.createCell(3).setCellValue(utilisateurService.findUserById(idUser));
+        if (utilisateurService.findUserById(idUser)!= null) {
+            row0.createCell(3).setCellValue(utilisateurService.findUserById(idUser).getName());
+        }
+
     }
 
     private static void createHeaderBordure(CellStyle headerStyle) {
@@ -106,8 +109,8 @@ public class ExportTaskServiceImpl implements ExportTaskService {
                 row.createCell(0).setCellValue(dto.getId());
                 row.createCell(1).setCellValue(dto.getTitle());
                 row.createCell(2).setCellValue(dto.getDescription());
-                row.createCell(3).setCellValue(dto.getPriority().toString());
-                row.createCell(4).setCellValue(dto.getStatus().toString());
+                row.createCell(3).setCellValue(dto.getPriority());
+                row.createCell(4).setCellValue(dto.getStatus());
                 row.createCell(5).setCellValue(Util.formatDateToString(dto.getDueDate()));
                 rowNum++;
 

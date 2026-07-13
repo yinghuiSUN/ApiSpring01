@@ -2,17 +2,15 @@ package net.javaguides.springboot_search_rest_api.utils;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Row;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Util {
     // message error
-    public static final String ERROR_001 = "Utilisateur does not exist";
+    public static final String ERROR_001 = "User does not exist";
     public static final String ERROR_002 = "Password is incorrect";
     public static final String ERROR_003 = "Connexion is OK";
     public static final String ERROR_004 = "Profile does not exist";
@@ -41,8 +39,37 @@ public class Util {
     public static final String USER_POST_MSG= "the user is created";
     public static final String USER_UPDATE_MSG= "the user is updated";
     public static final String USER_MSG_002= "the user exists";
+    public static final String USER_MSG_003 = "The user is found";
+
+
+    // departement message
+    public static final String DEPARTEMENT_MSG_001 = "All departements are found";
+    public static final String DEPARTEMENT_MSG_002 = "Users of this departement are found";
+
+    //connexion message
+    public static final String LOGIN_MSG_001 = "login success";
 
     public static final String pattern = "yyyy-MM-dd";
+
+    public static final String EMPLOYEE = "EMPLOYEE";
+    public static final String LEAD = "LEAD";
+    public static final String MANAGER = "MANAGER";
+    public static final String DIRECTOR = "DIRECTOR";
+    public static final String ADMIN = "ADMIN";
+
+    public static final List<String> EMPLOYEE_LEAD_DEPT_LIST = List.of(
+            "frontend", "test", "backend",
+            "communication vente", "reseau social", "presse",
+            "cse", "hr recrutement", "syndicat");
+
+    public static final List<String> MANAGER_DEPT_LIST = List.of(
+            "marketing service", "hr service",  "technic service");
+
+    public static final List<String> DIRECTOR_ADMIN_DEPT_LIST = List.of("directors");
+
+
+
+
 
     public static Row createHeaderExcel(Row headerRow, String[] displayColum, int indexStartCell, CellStyle headerStyle){
         for (int i=0; i<displayColum.length; i++) {

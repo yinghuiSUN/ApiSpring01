@@ -3,7 +3,6 @@ package net.javaguides.springboot_search_rest_api.service.impl;
 
 import net.javaguides.springboot_search_rest_api.dto.ProfileDto;
 import net.javaguides.springboot_search_rest_api.entity.Profile;
-import net.javaguides.springboot_search_rest_api.entity.Utilisateur;
 import net.javaguides.springboot_search_rest_api.mapper.ProfileMapper;
 import net.javaguides.springboot_search_rest_api.repository.ProfileRepository;
 import net.javaguides.springboot_search_rest_api.service.ProfileService;
