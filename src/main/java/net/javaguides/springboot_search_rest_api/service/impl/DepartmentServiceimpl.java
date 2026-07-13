@@ -2,7 +2,6 @@ package net.javaguides.springboot_search_rest_api.service.impl;
 
 import net.javaguides.springboot_search_rest_api.dto.DepartmentDto;
 import net.javaguides.springboot_search_rest_api.dto.DeptTreeDto;
-import net.javaguides.springboot_search_rest_api.dto.UtilisateurDto;
 import net.javaguides.springboot_search_rest_api.entity.Department;
 import net.javaguides.springboot_search_rest_api.enums.DataScope;
 import net.javaguides.springboot_search_rest_api.enums.Role;
